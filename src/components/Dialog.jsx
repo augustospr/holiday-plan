@@ -10,15 +10,19 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 export default function EditDialog({ open, handleClose, editItem, card }) {
 
-  const [newName, setNewName] = useState(card.nome);
-  const [newAge, setNewAge] = useState(card.idade);
-  const [newEmail, setNewEmail] = useState(card.email);
+  const [newTitle, setNewTitle] = useState(card.title);
+  const [newDate, setNewDate] = useState(card.date);
+  const [newDescription, setNewDescription] = useState(card.description);
+  const [newLocations, setNewLocations] = useState(card.locations);
+  const [newParticipants, setNewParticipants] = useState(card.participants);
 
   const sendNewInfos = () => {
     const newObj = {
-      nome: newName,
-      idade: newAge,
-      email: newEmail
+      title: newTitle,
+      date: newDate,
+      description: newDescription,
+      locations: newLocations,
+      participants: newParticipants
     }
     editItem(newObj, card._id);
     handleClose();
@@ -36,28 +40,48 @@ export default function EditDialog({ open, handleClose, editItem, card }) {
             type="text"
             fullWidth
             variant="standard"
-            value={newName}
-            onChange={(e) => setNewName(e.target.value)}
+            value={newTitle}
+            onChange={(e) => setNewTitle(e.target.value)}
           />
           <TextField
             autoFocus
             margin="dense"
-            label="Idade"
-            type="number"
+            label="Description"
+            type="text"
             fullWidth
             variant="standard"
-            value={newAge}
-            onChange={(e) => setNewAge(e.target.value)}
+            value={newDescription}
+            onChange={(e) => setNewDescription(e.target.value)}
           />
           <TextField
             autoFocus
             margin="dense"
-            label="Email"
-            type="email"
+            label="Date"
+            type="text"
             fullWidth
             variant="standard"
-            value={newEmail}
-            onChange={(e) => setNewEmail(e.target.value)}
+            value={newDate}
+            onChange={(e) => setNewDate(e.target.value)}
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            label="Location"
+            type="text"
+            fullWidth
+            variant="standard"
+            value={newLocations}
+            onChange={(e) => setNewLocations(e.target.value)}
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            label="Participants"
+            type="text"
+            fullWidth
+            variant="standard"
+            value={newParticipants}
+            onChange={(e) => setNewParticipants(e.target.value)}
           />
         </DialogContent>
         <DialogActions>
