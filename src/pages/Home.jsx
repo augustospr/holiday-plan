@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react"
-import { Button, Container, Grid, TextField } from '@mui/material'
+import { Button, Container, Grid, TextField, Box, MenuItem, Stack } from '@mui/material'
 import { ItemList } from "../components/ItemList"
 import axios from "axios";
 
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+
+// import jsPDF from 'jspdf';
 import dayjs from 'dayjs';
 
 export const Home = () => {
@@ -14,12 +16,11 @@ export const Home = () => {
   const [date, setDate] = useState(null);
   const [description, setDescription] = useState("");
   const [locations, setLocations] = useState("");
-  const [participants, setParticipants] = useState("");
-
+  const [participants, setParticipants] = useState([]);
   const [cards, setCards] = useState([]);
 
   const getApiData = () => {
-    axios.get("https://crudcrud.com/api/1a8090d5a4594fa083b301c5287e8fa7/register")
+    axios.get("https://crudcrud.com/api/58d3d71a1b3e4317b02bc5c096080e31/register")
       .then((res) => {
         setCards(res.data);
       });
@@ -34,22 +35,27 @@ export const Home = () => {
       locations: locations,
       participants: participants
     }
-    axios.post("https://crudcrud.com/api/1a8090d5a4594fa083b301c5287e8fa7/register", obj);
+    axios.post("https://crudcrud.com/api/58d3d71a1b3e4317b02bc5c096080e31/register", obj);
     getApiData();
     getApiData();
   };
 
   const deleteItem = (id) => {
-    axios.delete(`https://crudcrud.com/api/1a8090d5a4594fa083b301c5287e8fa7/register/${id}`)
+    axios.delete(`https://crudcrud.com/api/58d3d71a1b3e4317b02bc5c096080e31/register/${id}`)
     getApiData();
     getApiData();
   };
 
   const editItem = (newObj, id) => {
-    axios.put(`https://crudcrud.com/api/1a8090d5a4594fa083b301c5287e8fa7/register/${id}`, newObj)
+    axios.put(`https://crudcrud.com/api/58d3d71a1b3e4317b02bc5c096080e31/register/${id}`, newObj)
     getApiData();
     getApiData();
   }
+
+  const handleDateChange = (newValue) => {
+    const formattedDate = dayjs(newValue).format('YYYY-MM-DD');
+    setDate(formattedDate);
+  };
 
   useEffect(() => {
     getApiData();
@@ -60,9 +66,11 @@ export const Home = () => {
       <Container>
         <form onSubmit={addItem}>
           <Grid container mt={2} spacing={2} justifyContent="center">
+
             <Grid item xs={12} lg={12} my={3} textAlign="center">
               <h1>Holiday Plans</h1>
             </Grid>
+
             <Grid item xs={12} lg={4}>
               <TextField
                 type="text"
@@ -74,6 +82,7 @@ export const Home = () => {
                 required
               />
             </Grid>
+
             <Grid item xs={12} lg={4} >
               <TextField
                 type="text"
@@ -85,6 +94,7 @@ export const Home = () => {
                 required
               />
             </Grid>
+
             <Grid item xs={12} lg={4} >
               <TextField
                 type="text"
@@ -96,25 +106,40 @@ export const Home = () => {
                 required
               />
             </Grid>
+
             <Grid item xs={12} lg={4} >
-              <TextField
-                type="text"
-                label="Participants"
-                variant="outlined"
-                value={participants}
-                onChange={(e) => setParticipants(e.target.value)}
-                fullWidth
-                required
-              />
+              <Box width="100%">
+                <TextField
+                  label="Participants"
+                  select
+                  value={participants}
+                  onChange={(e) => setParticipants(e.target.value)}
+                  fullWidth
+                  SelectProps={{
+                    multiple: true
+                  }}
+                >
+                  <MenuItem value="Pessoa01">Pessoa01</MenuItem>
+                  <MenuItem value="Pessoa02">Pessoa02</MenuItem>
+                  <MenuItem value="Pessoa03">Pessoa03</MenuItem>
+                  <MenuItem value="Pessoa04">Pessoa04</MenuItem>
+                </TextField>
+              </Box>
             </Grid>
+
             <Grid item xs={12} lg={4}>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DatePicker
-                  label="Date"
-                  value={date}
-                />
+                <Stack spacing={4} sx={{ width: '250px' }}>
+                  <DatePicker
+                    label="Date"
+                    slotProps={{ textField: {} }}
+                    value={date}
+                    onChange={handleDateChange}
+                  />
+                </Stack>
               </LocalizationProvider>
             </Grid>
+            
             <Grid
               item
               xs={12}
@@ -128,7 +153,7 @@ export const Home = () => {
 
           <Grid container mt={3} justifyContent="center">
             <Grid item xs={12} textAlign="center">
-              <h2>Lista de cadastrados</h2>
+              <h2>Plans</h2>
             </Grid>
 
             {cards.map(card => (

@@ -6,7 +6,11 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-
+import { MenuItem, Stack } from '@mui/material';
+import { DatePicker } from '@mui/x-date-pickers';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import dayjs from 'dayjs';
 
 export default function EditDialog({ open, handleClose, editItem, card }) {
 
@@ -27,6 +31,11 @@ export default function EditDialog({ open, handleClose, editItem, card }) {
     editItem(newObj, card._id);
     handleClose();
   }
+
+  // const handleDateChange = (newValue) => {
+  //   const formattedDate = dayjs(newValue).format('YYYY-MM-DD');
+  //   setNewDate(formattedDate);
+  // };
 
   return (
     <div>
@@ -63,6 +72,16 @@ export default function EditDialog({ open, handleClose, editItem, card }) {
             value={newDate}
             onChange={(e) => setNewDate(e.target.value)}
           />
+          {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <Stack spacing={4} sx={{ width: '250px' }}>
+              <DatePicker
+                label="Date"
+                slotProps={{ textField: {} }}
+                value={newDate}
+                onChange={handleDateChange}
+              />
+            </Stack>
+          </LocalizationProvider> */}
           <TextField
             autoFocus
             margin="dense"
@@ -74,15 +93,20 @@ export default function EditDialog({ open, handleClose, editItem, card }) {
             onChange={(e) => setNewLocations(e.target.value)}
           />
           <TextField
-            autoFocus
-            margin="dense"
             label="Participants"
-            type="text"
-            fullWidth
-            variant="standard"
+            select
             value={newParticipants}
             onChange={(e) => setNewParticipants(e.target.value)}
-          />
+            fullWidth
+            SelectProps={{
+              multiple: true
+            }}
+          >
+            <MenuItem value="Pessoa01">Pessoa01</MenuItem>
+            <MenuItem value="Pessoa02">Pessoa02</MenuItem>
+            <MenuItem value="Pessoa03">Pessoa03</MenuItem>
+            <MenuItem value="Pessoa04">Pessoa04</MenuItem>
+          </TextField>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancelar</Button>
