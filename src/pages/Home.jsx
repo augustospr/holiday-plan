@@ -2,9 +2,7 @@ import React, { useEffect, useState } from "react"
 import { Button, Container, Grid, TextField, Box, MenuItem, Stack } from '@mui/material'
 import { ItemList } from "../components/ItemList"
 import axios from "axios";
-
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-
 import dayjs from 'dayjs';
 
 export const Home = () => {
@@ -109,10 +107,10 @@ export const Home = () => {
                     multiple: true
                   }}
                 >
-                  <MenuItem value="Pessoa01">Pessoa01</MenuItem>
-                  <MenuItem value="Pessoa02">Pessoa02</MenuItem>
-                  <MenuItem value="Pessoa03">Pessoa03</MenuItem>
-                  <MenuItem value="Pessoa04">Pessoa04</MenuItem>
+                  <MenuItem value="Person01">Person01</MenuItem>
+                  <MenuItem value="Person02">Person02</MenuItem>
+                  <MenuItem value="Person03">Person03</MenuItem>
+                  <MenuItem value="Person04">Person04</MenuItem>
                 </TextField>
               </Box>
             </Grid>
@@ -133,7 +131,7 @@ export const Home = () => {
               display="flex"
               justifyContent="center"
             >
-              <Button type="submit" variant="outlined">Cadastrar</Button>
+              <Button type="submit" variant="outlined">Register</Button>
             </Grid>
           </Grid>
           <Grid container mt={3} spacing={3} justifyContent="center">

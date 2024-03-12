@@ -37,12 +37,12 @@ export default function EditDialog({ open, handleClose, editItem, card }) {
   return (
     <div>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Edite as informações</DialogTitle>
+        <DialogTitle>Edit the information</DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
             margin="dense"
-            label="Nome"
+            label="Title"
             type="text"
             fullWidth
             variant="standard"
@@ -59,7 +59,7 @@ export default function EditDialog({ open, handleClose, editItem, card }) {
             value={newDescription}
             onChange={(e) => setNewDescription(e.target.value)}
           />
-          <Stack spacing={4} sx={{ width: '250px' }}>
+          <Stack spacing={4} sx={{ width: '250px', mt: 2 }}>
             <DatePicker
               label="Date"
               value={dayjs(newDate)}
@@ -68,6 +68,7 @@ export default function EditDialog({ open, handleClose, editItem, card }) {
           </Stack>
           <TextField
             autoFocus
+            sx={{ mt: 2 }}
             margin="dense"
             label="Location"
             type="text"
@@ -78,6 +79,7 @@ export default function EditDialog({ open, handleClose, editItem, card }) {
           />
           <TextField
             label="Participants"
+            sx={{ mt: 2 }}
             select
             value={newParticipants}
             onChange={(e) => setNewParticipants(e.target.value)}
@@ -86,15 +88,15 @@ export default function EditDialog({ open, handleClose, editItem, card }) {
               multiple: true
             }}
           >
-            <MenuItem value="Pessoa01">Pessoa01</MenuItem>
-            <MenuItem value="Pessoa02">Pessoa02</MenuItem>
-            <MenuItem value="Pessoa03">Pessoa03</MenuItem>
-            <MenuItem value="Pessoa04">Pessoa04</MenuItem>
+            <MenuItem value="Person01">Person01</MenuItem>
+            <MenuItem value="Person02">Person02</MenuItem>
+            <MenuItem value="Person03">Person03</MenuItem>
+            <MenuItem value="Person04">Person04</MenuItem>
           </TextField>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancelar</Button>
-          <Button onClick={sendNewInfos}>Editar</Button>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={sendNewInfos}>Edit</Button>
         </DialogActions>
       </Dialog>
     </div>

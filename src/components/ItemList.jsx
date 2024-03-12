@@ -36,13 +36,13 @@ export const ItemList = ({ card, deleteItem, editItem }) => {
         >
           <ListItemButton role={undefined} onClick={handleClickOpen} dense sx={{ display: 'flex', flexWrap: 'wrap' }} >
             <div ref={targetRef}>
-              <ListItemText primary={`Title: ` + card.title} />
-              <ListItemText primary={`Date: ` + card.date} />
-              <ListItemText primary={`Description: ` + card.description} />
-              <ListItemText primary={`Location: ` + card.locations} />
-              <ListItemText primary={`Participants: ` + card.participants} />
+              <ListItemText primary={`Title: ` + card.title} sx={{ mb: 1 }} />
+              <ListItemText primary={`Date: ` + card.date} sx={{ mb: 1 }} />
+              <ListItemText primary={`Description: ` + card.description} sx={{ mb: 1 }} />
+              <ListItemText primary={`Location: ` + card.locations} sx={{ mb: 1 }} />
+              <ListItemText primary={`Participants: ` + card.participants} sx={{ mb: 1 }} />
             </div>
-            <Button variant="outlined" onClick={(e) => {toPDF(); e.stopPropagation()}} sx={{ mt: 2 }}>Gerar PDF</Button>
+            <Button variant="outlined" onClick={(e) => {toPDF(); e.stopPropagation()}} sx={{ mt: 2 }}>PDF Generator</Button>
           </ListItemButton>
 
           <EditDialog open={open} handleClose={handleClose} editItem={editItem} card={card} />
