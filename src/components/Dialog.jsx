@@ -7,7 +7,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { MenuItem, Stack } from '@mui/material';
-import { DatePicker } from '@mui/x-date-pickers';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from 'dayjs';
@@ -32,10 +32,10 @@ export default function EditDialog({ open, handleClose, editItem, card }) {
     handleClose();
   }
 
-  // const handleDateChange = (newValue) => {
-  //   const formattedDate = dayjs(newValue).format('YYYY-MM-DD');
-  //   setNewDate(formattedDate);
-  // };
+  const handleDateChange = (newValue) => {
+    const formattedDate = dayjs(newValue).format('MM-DD-YYYY');
+    setNewDate(formattedDate);
+  };
 
   return (
     <div>
@@ -62,7 +62,7 @@ export default function EditDialog({ open, handleClose, editItem, card }) {
             value={newDescription}
             onChange={(e) => setNewDescription(e.target.value)}
           />
-          <TextField
+          {/* <TextField
             autoFocus
             margin="dense"
             label="Date"
@@ -71,17 +71,17 @@ export default function EditDialog({ open, handleClose, editItem, card }) {
             variant="standard"
             value={newDate}
             onChange={(e) => setNewDate(e.target.value)}
-          />
-          {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
+          /> */}
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
             <Stack spacing={4} sx={{ width: '250px' }}>
               <DatePicker
                 label="Date"
-                slotProps={{ textField: {} }}
+                // slotProps={{ textField: {} }}
                 value={newDate}
                 onChange={handleDateChange}
               />
             </Stack>
-          </LocalizationProvider> */}
+          </LocalizationProvider>
           <TextField
             autoFocus
             margin="dense"

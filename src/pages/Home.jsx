@@ -132,7 +132,7 @@ export const Home = () => {
                 <Stack spacing={4} sx={{ width: '250px' }}>
                   <DatePicker
                     label="Date"
-                    slotProps={{ textField: {} }}
+                    // slotProps={{ textField: {} }}
                     value={date}
                     onChange={handleDateChange}
                     required
