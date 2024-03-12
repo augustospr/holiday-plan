@@ -4,12 +4,9 @@ import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { MenuItem, Stack } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from 'dayjs';
 
 export default function EditDialog({ open, handleClose, editItem, card }) {
@@ -62,26 +59,13 @@ export default function EditDialog({ open, handleClose, editItem, card }) {
             value={newDescription}
             onChange={(e) => setNewDescription(e.target.value)}
           />
-          {/* <TextField
-            autoFocus
-            margin="dense"
-            label="Date"
-            type="text"
-            fullWidth
-            variant="standard"
-            value={newDate}
-            onChange={(e) => setNewDate(e.target.value)}
-          /> */}
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <Stack spacing={4} sx={{ width: '250px' }}>
-              <DatePicker
-                label="Date"
-                // slotProps={{ textField: {} }}
-                value={newDate}
-                onChange={handleDateChange}
-              />
-            </Stack>
-          </LocalizationProvider>
+          <Stack spacing={4} sx={{ width: '250px' }}>
+            <DatePicker
+              label="Date"
+              value={dayjs(newDate)}
+              onChange={handleDateChange}
+            />
+          </Stack>
           <TextField
             autoFocus
             margin="dense"

@@ -4,8 +4,6 @@ import { ItemList } from "../components/ItemList"
 import axios from "axios";
 
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 
 import dayjs from 'dayjs';
 
@@ -19,7 +17,7 @@ export const Home = () => {
   const [cards, setCards] = useState([]);
 
   const getApiData = () => {
-    axios.get("https://crudcrud.com/api/adef02357f1f4d58b0055beaa9af665a/register")
+    axios.get("https://crudcrud.com/api/cb8e38aab0904500be04815c494e959e/register")
       .then((res) => {
         setCards(res.data);
       });
@@ -34,21 +32,18 @@ export const Home = () => {
       locations: locations,
       participants: participants
     }
-    axios.post("https://crudcrud.com/api/adef02357f1f4d58b0055beaa9af665a/register", obj);
-    getApiData();
-    getApiData();
+    axios.post("https://crudcrud.com/api/cb8e38aab0904500be04815c494e959e/register", obj)
+      .then(() => getApiData());
   };
 
   const deleteItem = (id) => {
-    axios.delete(`https://crudcrud.com/api/adef02357f1f4d58b0055beaa9af665a/register/${id}`)
-    getApiData();
-    getApiData();
+    axios.delete(`https://crudcrud.com/api/cb8e38aab0904500be04815c494e959e/register/${id}`)
+      .then(() => getApiData());
   };
 
   const editItem = (newObj, id) => {
-    axios.put(`https://crudcrud.com/api/adef02357f1f4d58b0055beaa9af665a/register/${id}`, newObj)
-    getApiData();
-    getApiData();
+    axios.put(`https://crudcrud.com/api/cb8e38aab0904500be04815c494e959e/register/${id}`, newObj)
+      .then(() => getApiData());
   }
 
   const handleDateChange = (newValue) => {
@@ -65,11 +60,9 @@ export const Home = () => {
       <Container>
         <form onSubmit={addItem}>
           <Grid container mt={2} spacing={2} justifyContent="center">
-
             <Grid item xs={12} lg={12} my={3} textAlign="center">
               <h1>Holiday Plans</h1>
             </Grid>
-
             <Grid item xs={12} lg={4}>
               <TextField
                 type="text"
@@ -81,7 +74,6 @@ export const Home = () => {
                 required
               />
             </Grid>
-
             <Grid item xs={12} lg={4} >
               <TextField
                 type="text"
@@ -93,7 +85,6 @@ export const Home = () => {
                 required
               />
             </Grid>
-
             <Grid item xs={12} lg={4} >
               <TextField
                 type="text"
@@ -105,7 +96,6 @@ export const Home = () => {
                 required
               />
             </Grid>
-
             <Grid item xs={12} lg={4} >
               <Box width="100%">
                 <TextField
@@ -126,21 +116,16 @@ export const Home = () => {
                 </TextField>
               </Box>
             </Grid>
-
             <Grid item xs={12} lg={4} className="dateContainer">
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <Stack spacing={4} sx={{ width: '250px' }}>
-                  <DatePicker
-                    label="Date"
-                    // slotProps={{ textField: {} }}
-                    value={date}
-                    onChange={handleDateChange}
-                    required
-                  />
-                </Stack>
-              </LocalizationProvider>
+              <Stack spacing={4} sx={{ width: '250px' }}>
+                <DatePicker
+                  label="Date"
+                  value={dayjs(date)}
+                  onChange={handleDateChange}
+                  required
+                />
+              </Stack>
             </Grid>
-            
             <Grid
               item
               xs={12}
@@ -151,18 +136,15 @@ export const Home = () => {
               <Button type="submit" variant="outlined">Cadastrar</Button>
             </Grid>
           </Grid>
-
           <Grid container mt={3} spacing={3} justifyContent="center">
             <Grid item xs={12} textAlign="center">
               <h2>Plans</h2>
             </Grid>
-
             {cards.map(card => (
               <Grid key={card._id} item xs={12} lg={4}>
                 <ItemList card={card} deleteItem={deleteItem} editItem={editItem} />
               </Grid>
             ))}
-
           </Grid>
         </form>
       </Container>

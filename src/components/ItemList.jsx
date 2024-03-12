@@ -7,9 +7,11 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Button, Paper } from "@mui/material";
 import EditDialog from "./Dialog";
-// import jsPDF from 'jspdf';
+import { usePDF } from 'react-to-pdf';
 
 export const ItemList = ({ card, deleteItem, editItem }) => {
+
+  const { toPDF, targetRef } = usePDF({ filename: card._id + '.pdf' });
 
   const [open, setOpen] = useState(false);
 
@@ -33,12 +35,14 @@ export const ItemList = ({ card, deleteItem, editItem }) => {
           disablePadding
         >
           <ListItemButton role={undefined} onClick={handleClickOpen} dense sx={{ display: 'flex', flexWrap: 'wrap' }} >
-            <ListItemText primary={`Title: ` + card.title} />
-            <ListItemText primary={`Date: ` + card.date} />
-            <ListItemText primary={`Description: ` + card.description} />
-            <ListItemText primary={`Location: ` + card.locations} />
-            <ListItemText primary={`Participants: ` + card.participants} />
-            <Button variant="outlined" sx={{ mt: 2 }}>Gerar PDF</Button>
+            <div ref={targetRef}>
+              <ListItemText primary={`Title: ` + card.title} />
+              <ListItemText primary={`Date: ` + card.date} />
+              <ListItemText primary={`Description: ` + card.description} />
+              <ListItemText primary={`Location: ` + card.locations} />
+              <ListItemText primary={`Participants: ` + card.participants} />
+            </div>
+            <Button variant="outlined" onClick={(e) => {toPDF(); e.stopPropagation()}} sx={{ mt: 2 }}>Gerar PDF</Button>
           </ListItemButton>
 
           <EditDialog open={open} handleClose={handleClose} editItem={editItem} card={card} />
