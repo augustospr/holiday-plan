@@ -5,8 +5,9 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { Paper } from "@mui/material";
+import { Button, Paper } from "@mui/material";
 import EditDialog from "./Dialog";
+// import jsPDF from 'jspdf';
 
 export const ItemList = ({ card, deleteItem, editItem }) => {
 
@@ -37,6 +38,7 @@ export const ItemList = ({ card, deleteItem, editItem }) => {
             <ListItemText primary={`Description: ` + card.description} />
             <ListItemText primary={`Location: ` + card.locations} />
             <ListItemText primary={`Participants: ` + card.participants} />
+            <Button variant="outlined" sx={{ mt: 2 }}>Gerar PDF</Button>
           </ListItemButton>
 
           <EditDialog open={open} handleClose={handleClose} editItem={editItem} card={card} />

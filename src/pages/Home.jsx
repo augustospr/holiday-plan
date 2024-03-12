@@ -7,7 +7,6 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 
-// import jsPDF from 'jspdf';
 import dayjs from 'dayjs';
 
 export const Home = () => {
@@ -20,7 +19,7 @@ export const Home = () => {
   const [cards, setCards] = useState([]);
 
   const getApiData = () => {
-    axios.get("https://crudcrud.com/api/58d3d71a1b3e4317b02bc5c096080e31/register")
+    axios.get("https://crudcrud.com/api/adef02357f1f4d58b0055beaa9af665a/register")
       .then((res) => {
         setCards(res.data);
       });
@@ -35,25 +34,25 @@ export const Home = () => {
       locations: locations,
       participants: participants
     }
-    axios.post("https://crudcrud.com/api/58d3d71a1b3e4317b02bc5c096080e31/register", obj);
+    axios.post("https://crudcrud.com/api/adef02357f1f4d58b0055beaa9af665a/register", obj);
     getApiData();
     getApiData();
   };
 
   const deleteItem = (id) => {
-    axios.delete(`https://crudcrud.com/api/58d3d71a1b3e4317b02bc5c096080e31/register/${id}`)
+    axios.delete(`https://crudcrud.com/api/adef02357f1f4d58b0055beaa9af665a/register/${id}`)
     getApiData();
     getApiData();
   };
 
   const editItem = (newObj, id) => {
-    axios.put(`https://crudcrud.com/api/58d3d71a1b3e4317b02bc5c096080e31/register/${id}`, newObj)
+    axios.put(`https://crudcrud.com/api/adef02357f1f4d58b0055beaa9af665a/register/${id}`, newObj)
     getApiData();
     getApiData();
   }
 
   const handleDateChange = (newValue) => {
-    const formattedDate = dayjs(newValue).format('YYYY-MM-DD');
+    const formattedDate = dayjs(newValue).format('MM-DD-YYYY');
     setDate(formattedDate);
   };
 
@@ -115,6 +114,7 @@ export const Home = () => {
                   value={participants}
                   onChange={(e) => setParticipants(e.target.value)}
                   fullWidth
+                  required
                   SelectProps={{
                     multiple: true
                   }}
@@ -127,7 +127,7 @@ export const Home = () => {
               </Box>
             </Grid>
 
-            <Grid item xs={12} lg={4}>
+            <Grid item xs={12} lg={4} className="dateContainer">
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <Stack spacing={4} sx={{ width: '250px' }}>
                   <DatePicker
@@ -135,6 +135,7 @@ export const Home = () => {
                     slotProps={{ textField: {} }}
                     value={date}
                     onChange={handleDateChange}
+                    required
                   />
                 </Stack>
               </LocalizationProvider>
@@ -151,13 +152,13 @@ export const Home = () => {
             </Grid>
           </Grid>
 
-          <Grid container mt={3} justifyContent="center">
+          <Grid container mt={3} spacing={3} justifyContent="center">
             <Grid item xs={12} textAlign="center">
               <h2>Plans</h2>
             </Grid>
 
             {cards.map(card => (
-              <Grid key={card._id} item xs={12} lg={8}>
+              <Grid key={card._id} item xs={12} lg={4}>
                 <ItemList card={card} deleteItem={deleteItem} editItem={editItem} />
               </Grid>
             ))}
