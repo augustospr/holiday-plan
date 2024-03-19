@@ -14,8 +14,10 @@ export const Home = () => {
   const [participants, setParticipants] = useState([]);
   const [cards, setCards] = useState([]);
 
+  const api = "https://crudcrud.com/api/20d8f908167f48aba5479eace93a0bdb/register";
+
   const getApiData = () => {
-    axios.get("https://crudcrud.com/api/6c5e9cd8e3fc4bb6b5e138265330cd32/register")
+    axios.get(api)
       .then((res) => {
         setCards(res.data);
       });
@@ -30,17 +32,17 @@ export const Home = () => {
       locations: locations,
       participants: participants
     }
-    axios.post("https://crudcrud.com/api/6c5e9cd8e3fc4bb6b5e138265330cd32/register", obj)
+    axios.post(api, obj)
       .then(() => getApiData());
   };
 
   const deleteItem = (id) => {
-    axios.delete(`https://crudcrud.com/api/6c5e9cd8e3fc4bb6b5e138265330cd32/register/${id}`)
+    axios.delete(`${api}/${id}`)
       .then(() => getApiData());
   };
 
   const editItem = (newObj, id) => {
-    axios.put(`https://crudcrud.com/api/6c5e9cd8e3fc4bb6b5e138265330cd32/register/${id}`, newObj)
+    axios.put(`${api}/${id}`, newObj)
       .then(() => getApiData());
   }
 
