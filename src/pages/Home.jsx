@@ -14,7 +14,7 @@ export const Home = () => {
   const [participants, setParticipants] = useState([]);
   const [cards, setCards] = useState([]);
 
-  const api = "https://crudcrud.com/api/e68434e78f7b44eea81f35c7051578fd/register";
+  const api = "https://crudcrud.com/api/635574c3357e4316b3f9ad18005cd112/register";
 
   const getApiData = () => {
     axios.get(api)
